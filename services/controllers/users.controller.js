@@ -2,6 +2,7 @@ var md5 = require('md5');
 
 const { Users } = require('../sequelize');
 const { sign } = require('jsonwebtoken');
+const validations = require('../validations-messages');
 
 const login = (req, res) => {
 
@@ -11,12 +12,12 @@ const login = (req, res) => {
             emailid: email,
             password: md5(password)
         },
-        include: [{
-            model: Designations,
-            as: 'designation',
-            attributes: ['name']
-
-        }]
+        /*  include: [{
+             model: Designations,
+             as: 'designation',
+             attributes: ['name']
+ 
+         }] */
     })
         .then(response => {
 
@@ -27,19 +28,20 @@ const login = (req, res) => {
             if (response.length > 0) {
                 res.status(200).json({
                     error: false,
-                    message: "Logged in Successfully",
+                    message: validations.login_success,
                     token: jsonwebtoken,
-                    data: (response.length > 0) ? response[0] : {}
+                  //  data: (response.length > 0) ? response[0] : {}
                 });
             } else {
                 return res.status(200).json({
                     error: true,
-                    message: 'User Not Found'
+                    message: validations.login_fail
 
                 });
             }
         })
         .catch(error => {
+            console.log(error)
             return res.status(200).json({
                 error: true,
                 message: error.message
@@ -62,19 +64,20 @@ const users = (req, res) => {
             if (response) {
                 res.status(200).json({
                     error: false,
-                    message: "Users List",
+                    message: validations.user_list_found,
                     data: response,
                     count: response.length
                 });
             } else {
                 return res.status(200).json({
                     error: true,
-                    message: 'Users List Not Found'
+                    message: validations.user_list_found
 
                 });
             }
         })
         .catch(error => {
+            console.log(error)
             return res.status(200).json({
                 error: true,
                 message: error.message

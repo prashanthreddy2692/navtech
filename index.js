@@ -6,16 +6,18 @@ const cors = require('cors');
 
 
 const userRouter = require('./services/routes/users.router');
+const designationRouter = require('./services/routes/designations.router');
+const holidayRouter = require('./services/routes/holidays.router');
 
 const server = express();
 const { Users } = require('./services/sequelize');
 var app = require('http').Server(server)
 
 var originsWhitelist = [
-    'http://10.40.230.165:4200', //this is my front-end url for development
-    'http://devdms.sparity.com',
-    'https://devdms.sparity.com',
-    'http://localhost:4200',
+  'http://10.40.230.165:4200', //this is my front-end url for development
+  'http://devdms.sparity.com',
+  'https://devdms.sparity.com',
+  'http://localhost:4200',
 ];
 var corsOptions = {
   origin: function (origin, callback) {
@@ -35,7 +37,9 @@ const PORT = process.env.SERVER_PORT_NUMBER;
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
-server.use('/services/routes', userRouter)
+server.use('/services', userRouter);
+server.use('/', designationRouter);
+server.use('/', holidayRouter);
 
 app.listen(PORT, () => console.log(`server started with ${PORT} port number`));
 
