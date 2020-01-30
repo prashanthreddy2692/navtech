@@ -8,6 +8,8 @@ const cors = require('cors');
 const userRouter = require('./services/routes/users.router');
 const designationRouter = require('./services/routes/designations.router');
 const holidayRouter = require('./services/routes/holidays.router');
+const roleRouter = require('./services/routes/roles.router');
+const teamRouter = require('./services/routes/teams.router');
 
 const server = express();
 const { Users } = require('./services/sequelize');
@@ -37,9 +39,12 @@ const PORT = process.env.SERVER_PORT_NUMBER;
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
-server.use('/services', userRouter);
-server.use('/', designationRouter);
-server.use('/', holidayRouter);
+server.use('/ts_services', userRouter);
+server.use('/ts_services', designationRouter);
+server.use('/ts_services', holidayRouter);
+server.use('/ts_services', holidayRouter);
+server.use('/ts_services', roleRouter);
+server.use('/ts_services', teamRouter);
 
 app.listen(PORT, () => console.log(`server started with ${PORT} port number`));
 

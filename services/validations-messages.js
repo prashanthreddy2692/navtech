@@ -12,7 +12,13 @@ const validationMsgs = {
     designation_list_not_found: 'Designation List Not Found!',
 
     holiday_list_found: 'Holiday List!',
-    holiday_list_not_found: 'Holiday List Not Found!'
+    holiday_list_not_found: 'Holiday List Not Found!',
+
+    role_list_found: 'Role List!',
+    role_list_not_found: 'Role List Not Found!',
+
+    team_list_found: 'Team List!',
+    team_list_not_found: 'Team List Not Found!'
 
 }
 
