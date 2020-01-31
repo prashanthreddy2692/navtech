@@ -4,12 +4,16 @@ require('dotenv').config({ path: path.join(__dirname, `.env.local`) });
 const express = require('express');
 const cors = require('cors');
 
+const service = '/ts_services/v1.0';
 
 const userRouter = require('./services/routes/users.router');
 const designationRouter = require('./services/routes/designations.router');
 const holidayRouter = require('./services/routes/holidays.router');
 const roleRouter = require('./services/routes/roles.router');
 const teamRouter = require('./services/routes/teams.router');
+const leaveTypesRouter = require('./services/routes/leavetypes.router');
+const taskTypesRouter = require('./services/routes/tasktypes.router');
+const tabRouter = require('./services/routes/tabs.router');
 
 const server = express();
 const { Users } = require('./services/sequelize');
@@ -39,12 +43,16 @@ const PORT = process.env.SERVER_PORT_NUMBER;
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
-server.use('/ts_services', userRouter);
-server.use('/ts_services', designationRouter);
-server.use('/ts_services', holidayRouter);
-server.use('/ts_services', holidayRouter);
-server.use('/ts_services', roleRouter);
-server.use('/ts_services', teamRouter);
+server.use(service, userRouter);
+server.use(service, designationRouter);
+server.use(service, holidayRouter);
+server.use(service, holidayRouter);
+server.use(service, roleRouter);
+server.use(service, teamRouter);
+server.use(service, leaveTypesRouter);
+server.use(service, taskTypesRouter);
+server.use(service, taskTypesRouter);
+server.use(service, tabRouter);
 
 app.listen(PORT, () => console.log(`server started with ${PORT} port number`));
 
