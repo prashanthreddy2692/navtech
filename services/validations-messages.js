@@ -27,7 +27,17 @@ const validationMsgs = {
     task_list_not_found: 'Task List Not Found!',
 
     tab_list_found: 'Tab List!',
-    tab_list_not_found: 'Tab List Not Found!'
+    tab_list_not_found: 'Tab List Not Found!',
+
+    client_list_found: 'Client List!',
+    client_list_not_found: 'Client List Not Found!',
+
+    project_list_found: 'Project List!',
+    project_list_not_found: 'Project List Not Found!',
+
+    status_list_found: 'Status List!',
+    status_list_not_found: 'Status List Not Found!'
+
 }
 
 module.exports = validationMsgs;
