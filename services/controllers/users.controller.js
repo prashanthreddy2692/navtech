@@ -30,7 +30,7 @@ const login = (req, res) => {
                     error: false,
                     message: validations.login_success,
                     token: jsonwebtoken,
-                  //  data: (response.length > 0) ? response[0] : {}
+                    //  data: (response.length > 0) ? response[0] : {}
                 });
             } else {
                 return res.status(200).json({
@@ -71,7 +71,40 @@ const users = (req, res) => {
             } else {
                 return res.status(200).json({
                     error: true,
-                    message: validations.user_list_found
+                    message: validations.user_list_not_found
+
+                });
+            }
+        })
+        .catch(error => {
+            console.log(error)
+            return res.status(200).json({
+                error: true,
+                message: error.message
+            });
+        });
+}
+
+const userInfo = (req, res) => {
+
+    let query = {
+        id: req.body.userid
+    }
+
+    Users.findAll({ where: query })
+        .then(response => {
+
+            if (response) {
+                res.status(200).json({
+                    error: false,
+                    message: validations.user_details_found,
+                    data: response,
+                    //count: response.length
+                });
+            } else {
+                return res.status(200).json({
+                    error: true,
+                    message: validations.user_details_not_found
 
                 });
             }
@@ -89,5 +122,6 @@ const users = (req, res) => {
 
 module.exports = {
     login,
-    users
+    users,
+    userInfo
 }

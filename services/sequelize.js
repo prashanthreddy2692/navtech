@@ -11,6 +11,7 @@ const TabsModel = require('./models/tabs');
 const ClientsModel = require('./models/clients');
 const ProjectsModel = require('./models/projects');
 const AllStatusModel = require('./models/status');
+const MilestonesModel = require('./models/milestones');
 
 const config = require('../config/config');
 
@@ -25,6 +26,7 @@ const Tabs = TabsModel(config, Sequelize);
 const Clients = ClientsModel(config, Sequelize);
 const Projects = ProjectsModel(config, Sequelize);
 const AllStatus = AllStatusModel(config, Sequelize);
+const Milestones = MilestonesModel(config, Sequelize)
 
 config.sync(
   { force: false })
@@ -43,5 +45,6 @@ module.exports = {
   Tabs,
   Clients,
   Projects,
+  Milestones,
   AllStatus
 }

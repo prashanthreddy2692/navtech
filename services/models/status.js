@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 
     }, {
         underscored: true,
-
+        freezeTableName: true
     });
 
     return AllStatus;

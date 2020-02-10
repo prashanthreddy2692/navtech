@@ -17,6 +17,7 @@ const tabRouter = require('./services/routes/tabs.router');
 const clientRouter = require('./services/routes/clients.router');
 const projectRouter = require('./services/routes/projects.router');
 const statusRouter = require('./services/routes/status.router');
+const milestoneRouter = require('./services/routes/milestones.router');
 
 const server = express();
 const { Users } = require('./services/sequelize');
@@ -49,16 +50,15 @@ server.use(express.urlencoded({ extended: true }));
 server.use(service, userRouter);
 server.use(service, designationRouter);
 server.use(service, holidayRouter);
-server.use(service, holidayRouter);
+server.use(service, clientRouter);
 server.use(service, roleRouter);
 server.use(service, teamRouter);
 server.use(service, leaveTypesRouter);
 server.use(service, taskTypesRouter);
-server.use(service, taskTypesRouter);
 server.use(service, tabRouter);
-server.use(service, clientRouter);
 server.use(service, projectRouter);
 server.use(service, statusRouter);
+server.use(service, milestoneRouter);
 
 app.listen(PORT, () => console.log(`server started with ${PORT} port number`));
 

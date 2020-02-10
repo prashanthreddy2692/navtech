@@ -1,31 +1,31 @@
 
 
-const { AllStatus } = require('../sequelize');
+const { Milestones } = require('../sequelize');
 const validations = require('../validations-messages');
 
-const allstatus = (req, res) => {
+const milestones = (req, res) => {
 
     let query = {
-
+        project_id: req.body.project_id
     }
 
-    AllStatus.findAll({
+    Milestones.findAll({
         where: query,
-        attributes: ['id', 'name']
+        attributes: ['id', 'milestone']
     })
         .then(response => {
 
             if (response) {
                 res.status(200).json({
                     error: false,
-                    message: validations.status_list_found,
+                    message: validations.milestone_list_found,
                     data: response,
                     count: response.length
                 });
             } else {
                 return res.status(200).json({
                     error: true,
-                    message: validations.status_list_not_found
+                    message: validations.milestone_list_not_found
 
                 });
             }
@@ -42,5 +42,5 @@ const allstatus = (req, res) => {
 
 
 module.exports = {
-    allstatus
+    milestones
 }
