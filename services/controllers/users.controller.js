@@ -8,20 +8,18 @@ const login = (req, res) => {
 
     const { email, password } = req.body;
     Users.findAll({
+        attributes: ['id', 'fname', 'lname', 'emailid', 'roleid', 'emp_id'],
         where: {
             emailid: email,
             password: md5(password)
         },
-        /*  include: [{
-             model: Designations,
-             as: 'designation',
-             attributes: ['name']
- 
-         }] */
+        raw: true
     })
         .then(response => {
 
-            const jsonwebtoken = sign({ result: req.body }, process.env.JWT_KEY, {
+            let user_details = response[0];
+
+            const jsonwebtoken = sign({ user: user_details }, process.env.JWT_KEY, {
                 expiresIn: '1h'
             })
 
@@ -91,7 +89,7 @@ const userInfo = (req, res) => {
         id: req.body.userid
     }
 
-    Users.findAll({ where: query })
+    Users.findOne({ where: query })
         .then(response => {
 
             if (response) {
