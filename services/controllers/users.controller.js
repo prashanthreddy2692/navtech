@@ -8,7 +8,7 @@ const login = (req, res) => {
 
     const { email, password } = req.body;
     Users.findAll({
-        attributes: ['id', 'fname', 'lname', 'emailid', 'roleid', 'emp_id'],
+        attributes: ['id', 'name', 'emailid'],
         where: {
             emailid: email,
             password: md5(password)

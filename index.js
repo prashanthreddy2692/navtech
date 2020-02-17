@@ -4,20 +4,10 @@ require('dotenv').config({ path: path.join(__dirname, `.env.${process.env.NODE_E
 const express = require('express');
 const cors = require('cors');
 
-const service = '/ts_services/v1.0';
+const service = '/nav_services/v1.0';
 
 const userRouter = require('./services/routes/users.router');
-const designationRouter = require('./services/routes/designations.router');
-const holidayRouter = require('./services/routes/holidays.router');
-const roleRouter = require('./services/routes/roles.router');
-const teamRouter = require('./services/routes/teams.router');
-const leaveTypesRouter = require('./services/routes/leavetypes.router');
-const taskTypesRouter = require('./services/routes/tasktypes.router');
-const tabRouter = require('./services/routes/tabs.router');
-const clientRouter = require('./services/routes/clients.router');
-const projectRouter = require('./services/routes/projects.router');
-const statusRouter = require('./services/routes/status.router');
-const milestoneRouter = require('./services/routes/milestones.router');
+const orderRouter = require('./services/routes/orders.router');
 
 const server = express();
 const { Users } = require('./services/sequelize');
@@ -25,8 +15,6 @@ var app = require('http').Server(server)
 
 var originsWhitelist = [
   'http://10.40.230.165:4200', //this is my front-end url for development
-  'http://devdms.sparity.com',
-  'https://devdms.sparity.com',
   'http://localhost:4200',
 ];
 var corsOptions = {
@@ -48,17 +36,7 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
 server.use(service, userRouter);
-server.use(service, designationRouter);
-server.use(service, holidayRouter);
-server.use(service, clientRouter);
-server.use(service, roleRouter);
-server.use(service, teamRouter);
-server.use(service, leaveTypesRouter);
-server.use(service, taskTypesRouter);
-server.use(service, tabRouter);
-server.use(service, projectRouter);
-server.use(service, statusRouter);
-server.use(service, milestoneRouter);
+server.use(service, orderRouter);
 
 app.listen(PORT, () => console.log(`server started with ${PORT} port number`));
 
