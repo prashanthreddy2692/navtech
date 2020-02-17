@@ -108,6 +108,7 @@ export class OrderComponent implements OnInit {
           },
           (error: any) => {
             console.log("Order Record Creation Error:", error);
+            alert(error.message);
           }
         );
 
@@ -126,6 +127,7 @@ export class OrderComponent implements OnInit {
           },
           (error: any) => {
             console.log("Order Record Update Error:", error);
+            alert(error.message);
           }
         );
 

@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
         },
         (error: any) => {
           console.log("Login Service Error:", error);
+          alert(error.message);
         }
       );
 
