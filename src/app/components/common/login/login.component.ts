@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  remember: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,8 +25,16 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
+      remember: ['']
     });
+
+    let userData = this.authService.getUserData();
+
+    if (Object.keys(userData).length > 0) {
+      this.remember = true;
+      this.loginForm.patchValue(userData);
+    }
 
   }
 
@@ -39,6 +48,8 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.value.username,
       password: this.loginForm.value.password
     }
+
+    this.rememberMe(this.remember);
 
     this.service.loginService(postData)
       .subscribe(
@@ -56,6 +67,23 @@ export class LoginComponent implements OnInit {
           alert(error.message);
         }
       );
+
+  }
+
+  rememberMe(event) {
+
+    let userData = {}
+    this.remember = event;
+
+    if (event) {
+      userData = {
+        username: this.loginForm.value.username,
+        password: this.loginForm.value.password
+      }
+      this.authService.setUserData(userData, event);
+    } else {
+      this.authService.setUserData(userData, event);
+    }
 
   }
 

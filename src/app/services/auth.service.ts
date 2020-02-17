@@ -28,5 +28,23 @@ export class AuthService {
     sessionStorage.removeItem('access_token');
   }
 
+  setUserData(data: Object, type: Boolean) {
+
+    if (type) {
+
+      localStorage.setItem('userData', JSON.stringify(data));
+      return true;
+    } else {
+      localStorage.removeItem('userData');
+      return false;
+    }
+
+  }
+
+  getUserData() {
+    let returnData = JSON.parse(localStorage.getItem('userData'));
+    return returnData;
+  }
+
 
 }

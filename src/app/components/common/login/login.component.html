@@ -11,6 +11,11 @@
             <input matInput type="password" placeholder="Enter Password" formControlName="password">
         </mat-form-field>
 
+        <input type="checkbox" placeholder="Enter Password" formControlName="remember" [checked]="remember"
+            (click)="rememberMe($event.target.checked)">
+        remember me
+        <br>
+
         <button type="submit">Login</button>
 
     </form>
