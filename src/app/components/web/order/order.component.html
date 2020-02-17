@@ -1,0 +1,64 @@
+<form class="example-form" [formGroup]="orderForm" (ngSubmit)="save()">
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Order No *</mat-label>
+        <input matInput placeholder="Enter Order No" formControlName="order_no">
+        <mat-error *ngIf="orderForm.get('order_no').errors?.required">
+            Order No Required
+        </mat-error>
+        <mat-error *ngIf="orderForm.get('order_no').errors?.pattern">
+            Must be a Number
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Due Date *</mat-label>
+        <input matInput bsDatepicker formControlName="due_date">
+        <!--  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker> -->
+        <mat-error *ngIf="orderForm.get('due_date').errors?.required">
+            Due Date Required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Customer Name *</mat-label>
+        <input matInput placeholder="Enter Name" formControlName="customer">
+        <mat-error *ngIf="orderForm.get('customer').errors?.required">
+            Customer Name Required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Address *</mat-label>
+        <textarea matInput placeholder="Add Address" rows="4" formControlName="address"></textarea>
+        <mat-error *ngIf="orderForm.get('address').errors?.required">
+            Address Required
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Mobile *</mat-label>
+        <input matInput placeholder="Enter Mobile" max="10" formControlName="phone">
+        <mat-error *ngIf="orderForm.get('phone').errors?.required">
+            Mobile Number Required
+        </mat-error>
+        <mat-error *ngIf="orderForm.get('phone').errors?.pattern || orderForm.get('phone').errors?.minlength || orderForm.get('phone').errors?.maxlength">
+            Mobile should be 10 Digit Number
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Order Total *</mat-label>
+        <input matInput placeholder="Enter Password" formControlName="total">
+        <mat-error *ngIf="orderForm.get('total').errors?.required">
+            Order Total Required
+        </mat-error>
+        <mat-error *ngIf="orderForm.get('total').errors?.pattern">
+            Must be a Number
+        </mat-error>
+    </mat-form-field>
+
+    <button class="btn btn-success">{{buttonName}}</button>
+
+</form>
